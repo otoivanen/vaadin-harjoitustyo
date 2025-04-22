@@ -28,20 +28,24 @@ import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
 import java.util.Optional;
+
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.vaadin.lineawesome.LineAwesomeIconUrl;
 
 @PageTitle("Master-Detail")
-@Route("/:samplePersonID?/:action?(edit)")
-@Menu(order = 0, icon = LineAwesomeIconUrl.COLUMNS_SOLID)
-@RouteAlias("")
+@Route("/master/:samplePersonID?/:action?(edit)")
+@Menu(order = 2, icon = LineAwesomeIconUrl.COLUMNS_SOLID)
+@RouteAlias("master")
 @Uses(Icon.class)
+@RolesAllowed("ADMIN")
 public class MasterDetailView extends Div implements BeforeEnterObserver {
 
     private final String SAMPLEPERSON_ID = "samplePersonID";
-    private final String SAMPLEPERSON_EDIT_ROUTE_TEMPLATE = "/%s/edit";
+    private final String SAMPLEPERSON_EDIT_ROUTE_TEMPLATE = "master/%s/edit";
 
     private final Grid<SamplePerson> grid = new Grid<>(SamplePerson.class, false);
 

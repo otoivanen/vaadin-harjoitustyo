@@ -1,11 +1,11 @@
 package com.example.application.views;
 
+import com.example.application.data.User;
+import com.example.application.security.AuthenticatedUser;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.html.Footer;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.SvgIcon;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.sidenav.SideNav;
@@ -16,6 +16,7 @@ import com.vaadin.flow.server.menu.MenuConfiguration;
 import com.vaadin.flow.server.menu.MenuEntry;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -24,9 +25,11 @@ import java.util.List;
 @AnonymousAllowed
 public class MainLayout extends AppLayout {
 
+    private final AuthenticatedUser authenticatedUser;
     private H1 viewTitle;
 
-    public MainLayout() {
+    public MainLayout(AuthenticatedUser authenticatedUser) {
+        this.authenticatedUser = authenticatedUser;
         setPrimarySection(Section.DRAWER);
         addDrawerContent();
         addHeaderContent();
@@ -69,6 +72,18 @@ public class MainLayout extends AppLayout {
 
     private Footer createFooter() {
         Footer layout = new Footer();
+
+        Optional<User> maybeUser = authenticatedUser.get();
+        if (maybeUser.isPresent()) {
+            Button logoutButton = new Button("Log out");
+            logoutButton.addClickListener(e -> {
+                authenticatedUser.logout();
+            });
+            layout.add(logoutButton);
+        } else {
+            Anchor loginLink = new Anchor("Login", "Sign in");
+            layout.add(loginLink);
+        }
 
         return layout;
     }
