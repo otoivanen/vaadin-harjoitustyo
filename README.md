@@ -4,6 +4,7 @@ Valitettavasti ajanpuutteen vuoksi tehtävän suoritus jäi hieman vajaaksi, mut
 Tehtävänannon mukaisesti tarkoitus oli rakentaa sovellus jolla voi hallinnoida tulevia ja menneitä tapahtumia, sekä liittää tapahtumiin artisteja ja paikkoja
 
 - Luotu SPA sovellus Vaadin generaattorilla
+- Tiedot tallentuvat H2 inmemory tietokantaan
 - Pääentiteetti 'Event' - luokka joka kuvastaa tapahtumaa. Tapahtumalla on nimi ja tapahtuma-aika
 - Toinen entiteetti valmisteltu 'Artist' jossa olisi M:M suhde eventiin - sama artisti voi olla useassa eventissä ja yksi event sisältää monta artistia
 - Tarkoitus oli tehdä vielä 1:1 ja 1:M entiteetit mutta ne jäivät.. Suunnitelmissa oli esimerkikis 'tapahtumapaikka' -entiteetti 1:M suhteella eventiin
