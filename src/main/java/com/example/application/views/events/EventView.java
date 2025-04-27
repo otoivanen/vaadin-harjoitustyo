@@ -140,7 +140,7 @@ public class EventView extends VerticalLayout {
 //        grid.setItems(events != null ? Arrays.asList(events) : List.of());
         try {
             // Use the injected eventService instead of RestTemplate
-            List<Event> events = eventService.getAllEvents(); // Assuming you have this method
+            List<Event> events = eventService.getAllEvents();
 
             allEvents = events;
             grid.setItems(events);
